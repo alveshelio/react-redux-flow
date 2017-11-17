@@ -1,3 +1,4 @@
+/* @flow */
 import * as React from 'react';
 
 import './person.css';
@@ -6,16 +7,15 @@ import PersonItem from './PersonItem';
 type Person = {
   name: string,
   age: number,
-  id: string,
+  id: string
 };
-type PersonsListProps = Array<Person>;
 
 type PersonsListState = {
-  persons: Array<Person>,
+  persons: Array<Person>
 };
 
 
-class PersonsList extends React.Component<React.Node, PersonsListState, PersonsListProps> {
+class PersonsList extends React.Component<React.Node, PersonsListState> {
   state = {
     persons: [
       { id: 'abc', name: 'Helio', age: 41 },
@@ -26,7 +26,7 @@ class PersonsList extends React.Component<React.Node, PersonsListState, PersonsL
 
   nameChangeHandler = (e: SyntheticInputEvent<HTMLInputElement>, id: string) => {
     const persons = [...this.state.persons];
-    const personIndex = persons.findIndex(p => p.id === id);
+    const personIndex = persons.findIndex((p: Person) => p.id === id);
     persons[personIndex].name = e.target.value;
     this.setState(() => {
       return {
@@ -37,21 +37,24 @@ class PersonsList extends React.Component<React.Node, PersonsListState, PersonsL
 
   deletePersonHandler = (id: string) => {
     const persons = [...this.state.persons];
-    const filteredPersons = persons.filter(person => person.id !== id);
+    const filteredPersons = persons.filter((person: Person) => person.id !== id);
     this.setState(() => ({ persons: filteredPersons }));
   };
 
-  render() {
-    return (<div className='PersonsList'>
-      {this.state.persons.map((person, index) => <PersonItem
-        key={index}
-        name={person.name}
-        age={person.age}
-        id={person.id}
-        removePerson={this.deletePersonHandler}
-        onNameChange={this.nameChangeHandler}
-      />)}
-    </div>);
+  render(): React.Node {
+    return (
+      <div className='PersonsList'>
+        {this.state.persons.map((person: Person): React.Element<any> => <PersonItem
+            key={person.id}
+            name={person.name}
+            age={person.age}
+            id={person.id}
+            removePerson={this.deletePersonHandler}
+            onNameChange={this.nameChangeHandler}
+          />
+        )}
+      </div>
+    );
   }
 }
 

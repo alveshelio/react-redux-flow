@@ -1,24 +1,25 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import PersonsList from './components/Persons/PersonsList';
 
 type AppState = {
-  showPersons: boolean,
+  showPersons: boolean
 };
 
-class App extends Component<void, AppState> {
+
+class App extends React.Component<void, AppState> {
   state = {
     showPersons: true,
   };
 
-  togglePersons = (e: SyntheticEvent<HTMLButtonElement | HTMLDivElement>) => {
-    this.setState((prevSate) => ({ showPersons: !prevSate.showPersons }));
+  togglePersons = () => {
+    return this.setState((prevSate: AppState) => ({ showPersons: !prevSate.showPersons }));
   };
 
-  render() {
+  render(): React.Node {
     return (
       <div className='App'>
         <header className='App-header'>

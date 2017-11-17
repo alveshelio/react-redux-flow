@@ -1,8 +1,10 @@
 [ignore]
+.*/node_modules/.*
 
 [include]
 
 [libs]
+<PROJECT_ROOT>/flow-typed/
 
 [lints]
 
