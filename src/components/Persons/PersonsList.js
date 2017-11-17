@@ -1,7 +1,7 @@
 /* @flow */
 import * as React from 'react';
 
-import './person.css';
+import styles from './person.css';
 import PersonItem from './PersonItem';
 
 type Person = {
@@ -14,8 +14,7 @@ type PersonsListState = {
   persons: Array<Person>
 };
 
-
-class PersonsList extends React.Component<React.Node, PersonsListState> {
+class PersonsList extends React.Component<{}, PersonsListState> {
   state = {
     persons: [
       { id: 'abc', name: 'Helio', age: 41 },
@@ -43,7 +42,7 @@ class PersonsList extends React.Component<React.Node, PersonsListState> {
 
   render(): React.Node {
     return (
-      <div className='PersonsList'>
+      <div className={styles.PersonsList}>
         {this.state.persons.map((person: Person): React.Element<any> => <PersonItem
             key={person.id}
             name={person.name}

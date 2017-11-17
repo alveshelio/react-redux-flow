@@ -2,13 +2,8 @@
 
 }
 
-.App button {
-    padding: 5px 10px;
-    border: 1px solid #555;
-}
-
 .Person {
-    width: 60%;
+    width: 80%;
     margin: 20px auto;
     border: 1px solid #eee;
     box-shadow: 0 2px 3px #ccc;
@@ -16,3 +11,8 @@
     text-align: center;
 }
 
+@media (min-width: 500px) {
+    .Person {
+        width: 650px;
+    }
+}
