@@ -2,6 +2,8 @@
 import * as React from 'react';
 
 import styles from './person.css';
+import withStyles from '../../HOC/withStyles';
+import Aux from '../../HOC/Aux';
 
 type PersonProps = {
   children?: () => React.Node,
@@ -13,13 +15,26 @@ type PersonProps = {
   removePerson: Function
 };
 
-const PersonItem = (props: PersonProps): React.Node => (
-  <div className={styles.Person}>
-    <input type='text' onChange={(e: SyntheticInputEvent<HTMLInputElement>) => props.changeName(e, props.id)} value={props.name} />
-    <p>'Hi, my name is {props.name} and I'm {props.age} years old!'</p>
-    {props.children}
-    <button onClick={() => props.removePerson(props.id)}>Remove</button>
-  </div>
-);
+class PersonItem extends React.Component<PersonProps, {}> {
+  componentWillMount() {
+    console.log('[PersonItem.js] Inside componentWillMount');
+  }
 
-export default PersonItem;
+  componentDidMount() {
+    console.log('[PersonItem.js] Inside componentDidMount');
+  }
+  render(): React.Node {
+    console.log('[PersonItem.js] Inside Render Method');
+    const { id, name, age, children, changeName, removePerson } = this.props;
+    return (
+      <Aux>
+        <input type='text' onChange={(e: SyntheticInputEvent<HTMLInputElement>) => changeName(e, id)} value={name} />
+        <p>'Hi, my name is {name} and I'm {age} years old!'</p>
+        {children}
+        <button onClick={() => removePerson(id)}>Remove</button>
+      </Aux>
+    );
+  }
+}
+
+export default withStyles(PersonItem, styles.Person);
